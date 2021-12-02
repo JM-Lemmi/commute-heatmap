@@ -35,6 +35,10 @@ from https://forum.openstreetmap.org/viewtopic.php?id=22752
 
 This would probably also return an error, if there is no street around.
 
+There are public APIs availible, they are however of course not meant to be queried for massive amounts of data. https://wiki.openstreetmap.org/wiki/Overpass_API#Public_Overpass_API_instances
+
+There is a Docker Image that clones an Overpass Server and then gives a local API. This is probably the way forward. https://hub.docker.com/r/wiktorn/overpass-api
+
 ### Car commute
 
 The [Google Directions API](https://developers.google.com/maps/documentation/directions/overview?hl=de) does sadly no longer have a free tier. Alternatively a self-hosted OSMR instance can be used.
