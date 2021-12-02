@@ -19,6 +19,22 @@ coordinates bottom right: 49.108580, 9.277196
 
 ## APIs
 
+### Overpass API
+
+There is an Openstreetmaps Read only API that allows querying for the nearest "way".
+
+* https://github.com/ropensci/osmdata
+
+```
+way
+  [name];
+  (around:100,47.9928,37.8052)
+```
+
+from https://forum.openstreetmap.org/viewtopic.php?id=22752
+
+This would probably also return an error, if there is no street around.
+
 ### Car commute
 
 The [Google Directions API](https://developers.google.com/maps/documentation/directions/overview?hl=de) does sadly no longer have a free tier. Alternatively a self-hosted OSMR instance can be used.
