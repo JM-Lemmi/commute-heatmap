@@ -7,6 +7,16 @@ The basic structure of this script should be
 * Load a Map and overlay a Heatmap visualization
 
 
+## Coordinates
+
+In Germany one Breitengrad equals 71,44km.
+One Längengrad globally equals 111,13km.
+
+For this script 3 decimal positions are sufficient, that equals about 70m x 111m
+
+coordinates upper left: 49.428483, 8.627629
+coordinates bottom right: 49.108580, 9.277196
+
 ## APIs
 
 ### Car commute
