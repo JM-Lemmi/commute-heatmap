@@ -12,12 +12,21 @@ The basic structure of this script should be
 In Germany one Breitengrad equals 71,44km.
 One Längengrad globally equals 111,13km.
 
-For this script 3 decimal positions are sufficient, that equals about 70m x 111m
+Google Maps sadly does not have an API to get all cities in an area. The Places API has the category of "neighborhood", but you cannot request a list of that type in an area.
 
-coordinates upper left: 49.428483, 8.627629
-coordinates bottom right: 49.108580, 9.277196
+Using a grid of coordinates is also not very useful, as you'd probably settle somewhere closer to a population/village instead of on a random field, and the commuting times do differ because of ÖPNV anbindung there.
+
+## Background Map
+
+Google Maps will not give you more than 640x640px images, or if you specify why 2048x2048px, which is way less than i'd want. https://developers.google.com/maps/documentation/maps-static/start#Largerimagesizes
+
+So right now I'm just using a screenshot.
 
 ## APIs
+
+‼️ Google Maps Distance Matrix takes care of all the requirements, and the pricing is reasonable enough, to make it the easiest choice for this project.
+
+I'll leave my notes to other services below for anyone coming across this project with different requirements.
 
 ### Overpass API
 

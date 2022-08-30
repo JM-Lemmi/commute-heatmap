@@ -1,2 +1,0 @@
-docker run -e OVERPASS_META=yes -e OVERPASS_MODE=init -e OVERPASS_PLANET_URL=https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.bz2 -e OVERPASS_RULES_LOAD=10 -p 80:80 -i -t --name overpass_bawue wiktorn/overpass-api
-docker start overpass_bawue

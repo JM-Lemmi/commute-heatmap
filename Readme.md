@@ -1,4 +1,11 @@
 # R: Cumulative Commute Heatmap
 
-This R Script will create a Heatmap for a given Area with the cumulative commute for two workplaces.
-This makes an easy visualization for choosing a place for home, when both partners have to commute to a different place.
+## Usage
+
+Manually screenshot the area you want and save to `data\map.jpg`
+
+Note the corners of the screenshot in `data\corners.txt` in topleft, topright, bottomleft, bottomright order. You can just right-click the location in Google Maps and left-click the coordinates that are shown in the menu.
+
+Note all the cities in your area that are of interest in `data\origins.txt` in coordinate form. The order does not matter this time.
+
+Note the commuting destinations in `data\destinations.txt` in the same format.
