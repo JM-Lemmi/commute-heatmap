@@ -9,3 +9,7 @@ Note the corners of the screenshot in `data\corners.txt` in topleft, topright, b
 Note all the cities in your area that are of interest in `data\origins.txt` in coordinate form. The order does not matter this time.
 
 Note the commuting destinations in `data\destinations.txt` in the same format.
+
+Run `distance.py`, which will output the data into `data\distances.pickle`.
+
+Run `transform.py` to transform the data into a csv table at `data\dataset.csv`.
