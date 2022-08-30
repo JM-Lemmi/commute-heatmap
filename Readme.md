@@ -13,3 +13,5 @@ Note the commuting destinations in `data\destinations.txt` in the same format.
 Run `distance.py`, which will output the data into `data\distances.pickle`.
 
 Run `transform.py` to transform the data into a csv table at `data\dataset.csv`.
+
+Run `visualization.r` to create the visualization in `data\heatmap.png`

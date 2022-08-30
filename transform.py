@@ -14,7 +14,7 @@ with open('data\distances.pickle', 'rb') as f:
 origins =  []
 with open('data\origins.txt', 'r') as file:
     for line in file:
-        origins.append(line.strip('\n'))
+        origins.append(line.strip('\n').split(", ", 2))
 
 # the dataset we're creating is baiscally a set of coords + value associated
 # right now for testing its just the cumulative time of the location
@@ -22,10 +22,11 @@ with open('data\origins.txt', 'r') as file:
 dataset = []
 for i in range(len(origins)):
     time = distances[i]['rows'][0]['elements'][0]['duration']['value'] + distances[i]['rows'][0]['elements'][1]['duration']['value'] #this is time in seconds. the int between elements and duration gives the destination index
-    dataset.append([origins[i], time]) #origins at this point is still a string of the coordinates
+    dataset.append(origins[i] + [time]) #origins are split into lat and long
 
 # write dataset to csv for plotting with R
 with open('data\dataset.csv', 'w', newline='') as file:
     writer = csv.writer(file)
+    writer.writerow(["Latitude","Longitude","Time"])
     for l in dataset:
         writer.writerow(l)
