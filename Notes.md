@@ -41,7 +41,10 @@ from https://forum.openstreetmap.org/viewtopic.php?id=22752
 
 #### **online API**
 
-The [Google Directions API](https://developers.google.com/maps/documentation/directions/overview?hl=de) does sadly no longer have a free tier. Alternatively a self-hosted OSMR instance can be used.
+The [Google Directions API](https://developers.google.com/maps/documentation/directions/overview?hl=de) does sadly no longer have a free tier. DistanceMatrix may also be an alternative. Costs are 0.005 USD per Distance. Restricting to once per Dorf may keep the cost livable.
+
+Alternatively a self-hosted OSMR instance can be used.
+
 This however does not give ÖPNV commutes.
 
 * [Docker OSRM-backend](https://hub.docker.com/r/osrm/osrm-backend/)
