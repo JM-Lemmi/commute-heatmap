@@ -42,12 +42,25 @@ coords.map <- coords.map + geom_point(data=dest.df,  aes(x=Longitude, y=Latitude
 
 coords.data <- read.csv(file="./data/dataset.csv")
 coords.frame <- data.frame(coords.data[[1]], coords.data[[2]], coords.data[[3]])
+colnames(coords.frame) <- c("Latitude", "Longitude", "Time")
 
-coords.frame=coords.frame[ order(coords.frame[,1], coords.frame[,2],coords.frame[,3]), ]
-mba.int <- mba.surf(coords.frame, 300, 300, extend=T)$xyz.est
-heatmap <- fields::image.plot(mba.int)
+## way one
 
-coords.map <- coords.map + heatmap
+# i know this is a stupid solution, but hear me out!
+# there are many stackoverflow posts, that want the exact same visualization, that I want with ggplot2:
+# https://stackoverflow.com/q/64774664/9397749
+# https://stackoverflow.com/q/32148564/9397749
+# https://stackoverflow.com/q/46975986/9397749
+# https://stackoverflow.com/q/38592691/9397749
+# and the answers are all useless. Instead of using a value they want to use the density2d visualization, which is not something practical for me.
+# so this loop repeats the coordinates times the value I want to display to basically manually create the graph I want. Its very slow, but until I find something better it at least should work.
+# the first run has been going for over 15min now, so i'll cancel that but still keep it in mind!
+densecoords <- list()
+for (i in 1:length(coords.data[[1]])) {
+    for (j in 1:coords.data[[3]][i]) {
+        densecoords <- append(densecoords, c(coords.data[[1]][i], coords.data[[2]][i]))
+    }
+}
 
 ### general ###
 
