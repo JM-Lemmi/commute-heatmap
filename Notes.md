@@ -16,7 +16,10 @@ Google Maps sadly does not have an API to get all cities in an area. The Places 
 
 Using a grid of coordinates is also not very useful, as you'd probably settle somewhere closer to a population/village instead of on a random field, and the commuting times do differ because of ÖPNV anbindung there.
 
-Maybe just get the list from Wikipedia: https://de.wikipedia.org/wiki/Liste_der_Gemeinden_in_Baden-W%C3%BCrttemberg_nach_Amtlichen_Gemeindeschl%C3%BCsseln?wprov=sfla1
+Statistisches Landesamt veröffentlicht ein Gemeindeverzeichnis, allerdings ohne Koordinaten und möchte dafür außerdem 51€ auf CD-ROM... (https://www.statistik-bw.de/Service/Veroeff/Verzeichnisse/281119001.bs)
+
+Maybe just get the list from Wikipedia: https://de.wikipedia.org/wiki/Liste_der_Gemeinden_in_Baden-W%C3%BCrttemberg_nach_Amtlichen_Gemeindeschl%C3%BCsseln?wprov=sfla1 with the css selector `h4+ ul ul a:nth-child(1)`, xpath `//h4+//ul//ul//a[(((count(preceding-sibling::*) + 1) = 1) and parent::*)]`. Then getting the coordinates from the wikipedia page of that gemeinde: `#coordinates .text`<br>
+This is still a quite manual process, but the best I could find.
 
 ## Background Map
 
