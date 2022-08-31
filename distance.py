@@ -16,14 +16,19 @@ with open('data\origins.csv', 'r') as file:
         origins.append(line)
 
 destinations = []
+modes = []
 with open('data\destinations.csv', 'r') as file:
     for line in file:
-        destinations.append(line)
+        split = str.split(line, sep=",")
+        destinations.append(split[0] + split[1])
+        modes.append(split[2].strip().strip('"'))
 
 # using maps api to get the distances. splitting by origins to circumvent MAX_ELEMENTS_EXCEEDED and MAX_DIMENSIONS_EXCEEDED
 distance = []
-for o in origins:
-    distance.append(gmaps.distance_matrix(origins=o, destinations=destinations, mode="driving", region="de"))
+for i in range(len(destinations)):
+    for o in origins:
+        # TODO if transit set Monday 9 o'clock as the time!
+        distance.append(gmaps.distance_matrix(origins=o, destinations=destinations[i], mode=modes[i], region="de"))
 
 # write the results to file to save on api calls later
 with open('data\distances.pickle', 'wb') as file:

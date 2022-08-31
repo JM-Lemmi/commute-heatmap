@@ -6,7 +6,7 @@ Note the borders of of your area in `data\borders.txt` as comma separated values
 
 Start `scraper.r` to scrape all the towns in your area, output to `data\origins.csv`. (Currently only scrapes cities from Baden-Württemberg, Germany)
 
-Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot.
+Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot and the commuting mode ("driving", "transit", "bicycling", "walking").
 
 Run Part 1 of `visualization.r` to create the map with all origins and destinations marked on the map. The Image is saved to `data\visualization.png`.
 
