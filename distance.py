@@ -11,12 +11,12 @@ gmaps = googlemaps.Client(key=key)
 
 # reading origins and destinations from data directory
 origins =  []
-with open('data\origins.txt', 'r') as file:
+with open('data\origins.csv', 'r') as file:
     for line in file:
         origins.append(line)
 
 destinations = []
-with open('data\destinations.txt', 'r') as file:
+with open('data\destinations.csv', 'r') as file:
     for line in file:
         destinations.append(line)
 

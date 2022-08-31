@@ -2,13 +2,11 @@
 
 ## Usage
 
-Manually screenshot the area you want and save to `data\map.jpg`
+Note the borders of of your area in `data\borders.txt` as comma separated values in the order left, bottom, right, top.
 
-Note the corners of the screenshot in `data\corners.txt` in topleft, topright, bottomleft, bottomright order. You can just right-click the location in Google Maps and left-click the coordinates that are shown in the menu.
+Start `scraper.r` to scrape all the towns in your area, output to `data\origins.csv`. (Currently only scrapes cities from Baden-Württemberg, Germany)
 
-Note all the cities in your area that are of interest in `data\origins.txt` in coordinate form. The order does not matter this time.
-
-Note the commuting destinations in `data\destinations.txt` in the same format.
+Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot.
 
 Run `distance.py`, which will output the data into `data\distances.pickle`.
 

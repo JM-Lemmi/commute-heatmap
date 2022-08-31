@@ -43,3 +43,17 @@ for (t in linklist.long) {
     
     coordinates <- append(coordinates, list(c(lat_d, long_d)))
 }
+
+borders <- scan(file = "./data/borders.txt", what = numeric(), sep = ",")
+
+origins <- list()
+for (t in coordinates) {
+  if ((borders[2] < t[1]) & (t[1] < borders[4])) {
+    if ((borders[1] < t[2]) & (t[2] < borders[3])) {
+      origins <- append(origins, list(t)) 
+    }
+  }
+}
+
+origins.df <- as.data.frame(do.call(rbind, origins)) #convert to dataframe
+write.table(origins.df, sep=",",  col.names=FALSE, row.names=FALSE, file="./data/origins.csv") #save to data/origins.csv
