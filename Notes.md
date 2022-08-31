@@ -16,15 +16,16 @@ Google Maps sadly does not have an API to get all cities in an area. The Places 
 
 Using a grid of coordinates is also not very useful, as you'd probably settle somewhere closer to a population/village instead of on a random field, and the commuting times do differ because of ÖPNV anbindung there.
 
-This article has a nice R package that will get a map. https://axelhodler.medium.com/creating-a-heat-map-from-coordinates-using-r-780db4901075
-
-And this for a map I can use, because I dont want a scatterplot-heatmap, but a value driven heatmap: https://stackoverflow.com/a/29193971/9397749
+Maybe just get the list from Wikipedia: https://de.wikipedia.org/wiki/Liste_der_Gemeinden_in_Baden-W%C3%BCrttemberg_nach_Amtlichen_Gemeindeschl%C3%BCsseln?wprov=sfla1
 
 ## Background Map
 
 Google Maps will not give you more than 640x640px images, or if you specify why 2048x2048px, which is way less than i'd want. https://developers.google.com/maps/documentation/maps-static/start#Largerimagesizes
 
-So right now I'm just using a screenshot.
+This article has a nice R package that will get a map. https://axelhodler.medium.com/creating-a-heat-map-from-coordinates-using-r-780db4901075
+
+And this for a map I can use, because I dont want a scatterplot-heatmap, but a value driven heatmap: https://stackoverflow.com/a/29193971/9397749
+
 
 ## APIs
 
