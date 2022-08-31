@@ -33,7 +33,7 @@ for j in range(numdest):                            #destination loop
             dataset[i][3+j] = distances[i+(j*len(origins))]['rows'][0]['elements'][0]['duration']['value'] #this is time in seconds. the int between elements and duration gives the destination index
                                 # i+(j*len(origins)) weil wir ja weiterloopen nachdem wir alle origins durchhaben. das heißt bei j=1 muss dann immer einmal die länge von origins aufaddiert werden usw, damit die werte sich nicht wiederholen
         else: # in case there is no connection possible, or an error occurs
-            dataset[i][3+j] = 99999
+            dataset[i][3+j] = 7200 # this value should be higher than anything else, but not too high as to make the rest of the data basically invisible.
 
 
 # then the sum of all the time values we collected

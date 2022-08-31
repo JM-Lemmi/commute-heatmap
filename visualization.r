@@ -42,6 +42,14 @@ coords.map <- coords.map + geom_point(data=dest.df,  aes(x=Longitude, y=Latitude
 
 coords.data <- read.csv(file="./data/dataset.csv")
 coords.frame <- data.frame(coords.data[[1]], coords.data[[2]], coords.data[[3]])
+colnames(coords.frame) <- c("Latitude", "Longitude", "Time")
+
+# limitierung auf 3h, um bessere plotfarben zu bekommen
+for (i in 1:length(coords.frame$Time)) {
+    if (coords.frame$Time[i] > 10800) {
+        coords.frame$Time[i] = 10800
+    }
+}
 
 coords.frame=coords.frame[ order(coords.frame[,1], coords.frame[,2],coords.frame[,3]), ]
 mba.int <- mba.surf(coords.frame, 300, 300, extend=T)$xyz.est
