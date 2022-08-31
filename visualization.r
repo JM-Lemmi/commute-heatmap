@@ -42,31 +42,10 @@ coords.map <- coords.map + geom_point(data=dest.df,  aes(x=Longitude, y=Latitude
 
 coords.data <- read.csv(file="./data/dataset.csv")
 coords.frame <- data.frame(coords.data[[1]], coords.data[[2]], coords.data[[3]])
-colnames(coords.frame) <- c("Latitude", "Longitude", "Time")
 
-## way one
-
-# i know this is a stupid solution, but hear me out!
-# there are many stackoverflow posts, that want the exact same visualization, that I want with ggplot2:
-# https://stackoverflow.com/q/64774664/9397749
-# https://stackoverflow.com/q/32148564/9397749
-# https://stackoverflow.com/q/46975986/9397749
-# https://stackoverflow.com/q/38592691/9397749
-# and the answers are all useless. Instead of using a value they want to use the density2d visualization, which is not something practical for me.
-# so this loop repeats the coordinates times the value I want to display to basically manually create the graph I want. Its very slow, but until I find something better it at least should work.
-# the first run has been going for over 15min now, so i'll cancel that but still keep it in mind!
-coords.density <- list()
-for (i in 1:length(coords.data[[1]])) {
-    for (j in 1:floor(coords.data[[3]][i]/60)) { #/60 improves the performance, and reduces time accuracy to minutes
-        coords.density <- append(coords.density, list(c(coords.data[[1]][i], coords.data[[2]][i])))
-    }
-}
-coords.density.df <- as.data.frame(do.call(rbind, coords.density))
-colnames(coords.density.df) <- c("Latitude", "Longitude")
-
-coords.map <- coords.map +
-    stat_density2d(data=coords.density.df,  aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon") +
-    scale_fill_gradientn(colours=rev(brewer.pal(7, "Spectral")))
+coords.frame=coords.frame[ order(coords.frame[,1], coords.frame[,2],coords.frame[,3]), ]
+mba.int <- mba.surf(coords.frame, 300, 300, extend=T)$xyz.est
+heatmap <- fields::image.plot(mba.int)
 
 ### general ###
 
