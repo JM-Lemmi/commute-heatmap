@@ -12,7 +12,7 @@ with open('data\distances.pickle', 'rb') as f:
 
 # reading origins and destinations from data directory
 origins =  []
-with open('data\origins.txt', 'r') as file:
+with open('data\origins.csv', 'r') as file:
     for line in file:
         origins.append(line.strip('\n').split(", ", 2))
 
@@ -30,3 +30,5 @@ with open('data\dataset.csv', 'w', newline='') as file:
     writer.writerow(["Latitude","Longitude","Time"])
     for l in dataset:
         writer.writerow(l)
+
+#TODO outputs dataset with coords as string instead of two doubles. currently fixing manually by replaicing all " with nothing

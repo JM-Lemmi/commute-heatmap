@@ -55,12 +55,18 @@ colnames(coords.frame) <- c("Latitude", "Longitude", "Time")
 # and the answers are all useless. Instead of using a value they want to use the density2d visualization, which is not something practical for me.
 # so this loop repeats the coordinates times the value I want to display to basically manually create the graph I want. Its very slow, but until I find something better it at least should work.
 # the first run has been going for over 15min now, so i'll cancel that but still keep it in mind!
-densecoords <- list()
+coords.density <- list()
 for (i in 1:length(coords.data[[1]])) {
-    for (j in 1:coords.data[[3]][i]) {
-        densecoords <- append(densecoords, c(coords.data[[1]][i], coords.data[[2]][i]))
+    for (j in 1:floor(coords.data[[3]][i]/60)) { #/60 improves the performance, and reduces time accuracy to minutes
+        coords.density <- append(coords.density, list(c(coords.data[[1]][i], coords.data[[2]][i])))
     }
 }
+coords.density.df <- as.data.frame(do.call(rbind, coords.density))
+colnames(coords.density.df) <- c("Latitude", "Longitude")
+
+coords.map <- coords.map +
+    stat_density2d(data=coords.density.df,  aes(x=Longitude, y=Latitude, fill=..level.., alpha=..level..), geom="polygon") +
+    scale_fill_gradientn(colours=rev(brewer.pal(7, "Spectral")))
 
 ### general ###
 
