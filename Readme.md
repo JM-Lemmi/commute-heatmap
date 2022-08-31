@@ -8,6 +8,8 @@ Start `scraper.r` to scrape all the towns in your area, output to `data\origins.
 
 Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot.
 
+Run Part 1 of `visualization.r` to create the map with all origins and destinations marked on the map. The Image is saved to `data\visualization.png`.
+
 Run `distance.py`, which will output the data into `data\distances.pickle`.
 
 Run `transform.py` to transform the data into a csv table at `data\dataset.csv`.
