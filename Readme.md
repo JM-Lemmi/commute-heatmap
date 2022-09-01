@@ -9,10 +9,11 @@
 4. Start `scraper.py` to scrape all the towns in your area, output to `data\origins.csv`.<br>This can really take a while. My testing area of 70x70km took about about 1.5 hours. The smaller the extract (only one federal state for example) the faster probably, but if your area overlaps multiple Federal States, thats not that easy.
 5. Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot and the commuting mode ("driving", "transit", "bicycling", "walking").
     * If you want to viualize the locations, you can run the first part of `visualization.r`.
+    * Right now only 2 destinations are supported.
 6. Copy your Google Maps API key to `api.key`. It needs access to the [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview).
 7. Run `distance.py`, which will output the data into `data\distances.pickle`.
 8. Run `transform.py` to transform the data into a csv table at `data\dataset.csv`.
-9. ‼️ wip ‼️ Run `visualization.r` to create the map in `data\visualization.png` and the heatmap in the R temp directory.
+9. Run `visualization.r` to create the heatmaps.<br> 3 Maps will be output: Cumulative `data\visualization-cum.png` and one each for the destinations.
 
 ## Detailed information
 
