@@ -4,6 +4,7 @@
 
 library(rvest)
 library(sp)
+library(stringi)
 
 # set variables here for different page!
 page <- "https://de.wikipedia.org/wiki/Liste_der_Gemeinden_in_Baden-W%C3%BCrttemberg_nach_Amtlichen_Gemeindeschl%C3%BCsseln" # Wikipedia Page with the List
