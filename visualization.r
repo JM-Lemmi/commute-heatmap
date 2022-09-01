@@ -7,15 +7,20 @@
 library(ggplot2)
 library(ggmap)
 library(RColorBrewer)
+
 library(MBA)
-library(fields)
+# heatmap https://stackoverflow.com/a/42984201/9397749
+library(lubridate)
+library(reshape2)
+library(colorRamps)
+library(scales)
 
 # get the borders of the map from ./data/borders.txt
 borders <- scan(file = "./data/borders.txt", what = numeric(), sep = ",")
 
 map_bounds <- c(left = borders[1], bottom = borders[2], right = borders[3], top = borders[4])
-coords.map <- get_stamenmap(map_bounds, zoom = 12, maptype = "toner-lite")
-coords.map <- ggmap(coords.map, extent="device", legend="none")
+stamenmap <- get_stamenmap(map_bounds, zoom = 12, maptype = "toner-lite")
+coords.map <- ggmap(stamenmap, extent="device", legend="none")
 
 ### 1 ###
 
@@ -52,8 +57,15 @@ for (i in 1:length(coords.frame$Time)) {
 }
 
 coords.frame=coords.frame[ order(coords.frame[,1], coords.frame[,2],coords.frame[,3]), ]
-mba.int <- mba.surf(coords.frame, 300, 300, extend=T)$xyz.est
-heatmap <- fields::image.plot(mba.int)
+#https://stackoverflow.com/a/42984201/9397749
+mba <- mba.surf(coords.frame, 300, 300, extend=T)
+dimnames(mba$xyz.est$z) <- list(mba$xyz.est$x, mba$xyz.est$y)
+df3 <- melt(mba$xyz.est$z, varnames = c('Latitude', 'Longitude'), value.name = 'Time')
+
+coords.map <- coords.map +
+    geom_raster(data=df3, aes(x=Longitude, y=Latitude, fill=Time), alpha=0.25) +
+    scale_fill_gradientn(colours = matlab.like2(7)) +
+    coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
 
 ### general ###
 
