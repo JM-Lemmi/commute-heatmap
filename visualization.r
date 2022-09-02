@@ -81,7 +81,9 @@ df3.1 <- melt(mba.1$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
 
 heatmap.1 <- heatmap.1 +
     geom_raster(data=df3.1, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
-    geom_contour(data=df3.1, aes(z = Time), color="grey") +
+    geom_contour(data=df3.1, aes(z = Time),
+        color="grey",
+        binwidth = 10*60) +
     scale_fill_gradientn(colours = matlab.like2(7)) +
     coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
 
@@ -96,7 +98,9 @@ df3.2 <- melt(mba.2$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
 
 heatmap.2 <- heatmap.2 +
     geom_raster(data=df3.2, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
-    geom_contour(data=df3.2, aes(z = Time), color="grey") +
+    geom_contour(data=df3.2, aes(z = Time),
+        color="grey",
+        binwidth = 10*60) +
     scale_fill_gradientn(colours = matlab.like2(7)) +
     coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
 
