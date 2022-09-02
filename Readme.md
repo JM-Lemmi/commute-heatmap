@@ -1,5 +1,9 @@
 # R: Cumulative Commute Heatmap
 
+## Example
+
+![](./.github/visualization-cum.png)
+
 ## Usage
 
 1. Note the borders of of your area in `data\borders.txt` as comma separated values in the order left, bottom, right, top.
