@@ -16,9 +16,10 @@ class CityHandler(osmium.SimpleHandler):
 
     def node(self, n):
         if 'place' in n.tags:
-            if n.tags.get('place') == 'city' or n.tags.get('place') == 'town' or n.tags.get('place') == 'suburb':
+            if n.tags.get('place') == 'city' or n.tags.get('place') == 'town' or n.tags.get('place') == 'village' or n.tags.get('place') == 'suburb':
                 if float(self.borders[1]) < n.location.lat < float(self.borders[3]) and float(self.borders[0]) < n.location.lon < float(self.borders[2]):
-                    print("matched! " + n.tags.get('name') + ", " + str(n.location.lat) + ", " + str(n.location.lon))
+                    try: print("matched! " + n.tags.get('name') + ", " + str(n.location.lat) + ", " + str(n.location.lon))
+                    except: print("matched! -, " + str(n.location.lat) + ", " + str(n.location.lon)) #if location has no name
                     self.cities.append([n.location.lat, n.location.lon])
 
 c = CityHandler()
