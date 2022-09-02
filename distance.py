@@ -1,6 +1,7 @@
 # Julian Lemmerich
 # getting distance data for a list of coordinates from Google Maps
 
+from datetime import datetime
 import googlemaps
 import pickle
 
@@ -27,8 +28,7 @@ with open('data\destinations.csv', 'r') as file:
 distance = []
 for i in range(len(destinations)):
     for o in origins:
-        # TODO if transit set Monday 9 o'clock as the time!
-        distance.append(gmaps.distance_matrix(origins=o, destinations=destinations[i], mode=modes[i], region="de"))
+        distance.append(gmaps.distance_matrix(origins=o, destinations=destinations[i], mode=modes[i], region="de", arrival_time=datetime(2022, 9, 5, 8, 0)))
 
 # write the results to file to save on api calls later
 with open('data\distances.pickle', 'wb') as file:
