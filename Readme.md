@@ -59,9 +59,13 @@ Manually add time to a commute, if you want to adjust the time from the Maps API
 
 This may be useful since you cannot combine transit and other modes of transportation explicitly. The use case would be setting the destination to central station, then adding 10 minutes that you know its gonna take to ride from central station to work.
 
+This is availible for the cumulative value as well as single destinations.
+
 #### cap time
 
 Cap the time to a maximum value. This is useful if you want to exclude long commutes, since they are not very interesting.
+
+This is availible for the cumulative value as well as single destinations.
 
 ### osmium merge
 

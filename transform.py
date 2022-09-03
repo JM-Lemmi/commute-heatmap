@@ -36,9 +36,9 @@ for j in range(numdest):                            #destination loop
             dataset[i][3+j] = 3*60 # this value should be higher than anything else, but not too high as to make the rest of the data basically invisible.
 
 # add time to one destination manually
-addman = False # set this to true to use this feature
+addman = True # set this to true to use this feature
 if addman:
-    adddest = 2  #choose which destination (1 or 2), or both (0)
+    adddest = 2  #choose which destination (1 or 2)
     addtime = 10 #time in minutes
     for l in range(len(dataset)):
         dataset[l][2+adddest] += addtime
@@ -46,7 +46,7 @@ if addman:
 # set a cap to commute time
 addcap = False # set this to true to use this feature
 if addcap:
-    capdest = 0  #choose which destination (1 or 2), or both (0)
+    capdest = 2  #choose which destination (1 or 2)
     captime = 3*60 #time in minutes
     for m in range(len(dataset)):
         if dataset[m][2+capdest] > captime:
@@ -55,6 +55,21 @@ if addcap:
 # then the sum of all the time values we collected
 for k in range(len(dataset)):
     dataset[k][2] = sum(dataset[k][3:])
+
+# add time to cumulative commute manually
+addman = False # set this to true to use this feature
+if addman:
+    addtime = 10 #time in minutes
+    for l in range(len(dataset)):
+        dataset[l][2] += addtime
+
+# set a cap to cumulative commute time
+addcap = True # set this to true to use this feature
+if addcap:
+    captime = 3*60 #time in minutes
+    for m in range(len(dataset)):
+        if dataset[m][2] > captime:
+            dataset[m][2] = captime
 
 # write dataset to csv for plotting with R
 with open('data\dataset.csv', 'w', newline='') as file:
