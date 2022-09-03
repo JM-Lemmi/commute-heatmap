@@ -49,6 +49,14 @@ The script uses osmium with an osm extract for full ofline use.
 
 By default it selects all nodes with place tag "town", "village", "city" and "suburb". This may be too detailled for you. Or if you only want to use it for once city you could select all single addresses in a city, or all trainstations in an area. Since `origins.csv`, which is later used for the distance calculation is only coordinates, you can choose any filter that you want.
 
+### transform.py
+
+Has the option to manually add time to a commute, if you want to adjust the time from the Maps API.
+
+This may be useful since you cannot combine transit and other modes of transportation explicitly. The use case would be setting the destination to central station, then adding 10 minutes that you know its gonna take to ride from central station to work.
+
+The feature is deactivated by default, but you can activate it by setting `addman` to `True` in `transform.py`.
+
 ### osmium merge
 
 Using a full German extract crashed after 14h.

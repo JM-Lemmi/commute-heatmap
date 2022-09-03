@@ -35,6 +35,13 @@ for j in range(numdest):                            #destination loop
         else: # in case there is no connection possible, or an error occurs
             dataset[i][3+j] = 3*60 # this value should be higher than anything else, but not too high as to make the rest of the data basically invisible.
 
+# add time to one destination manually
+addman = False # set this to true to use this feature
+if addman:
+    adddest = 2  #choose which destination (1 or 2)
+    addtime = 10 #time in minutes
+    for l in range(len(dataset)):
+        dataset[l][2+adddest] += addtime
 
 # then the sum of all the time values we collected
 for k in range(len(dataset)):
