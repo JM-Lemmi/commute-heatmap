@@ -23,8 +23,9 @@ You can install the python packages with `pip install -r requirements.txt` and t
 1. Note the borders of of your area in `data\borders.txt` as comma separated values in the order left, bottom, right, top.
 2. Download an osm extract for your area, for example Germany from here: https://download.geofabrik.de/europe/germany.html<br>Put the osm file in the `data` folder and rename it to `osm.osm.pbf`.
     * If you have a more narrow choice of origins, you can also manually add them to `data\origins.csv`. The format is: `lat,lon`.
+    * You should choose the smallest possible extract, because the bigger the file, the longer it takes to process it. See more details below.
 3. Install the Python packages with `pip install -r requirements.txt`.
-4. Start `scraper.py` to scrape all the towns in your area, output to `data\origins.csv`.<br>This can really take a while. My initial testing with the full german osm would run out of memory. The smaller the extract (only one federal state for example) the faster probably, but if your area overlaps multiple Federal States, thats not that easy.
+4. Start `scraper.py` to scrape all the towns in your area, output to `data\origins.csv`.
 5. Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot and the commuting mode ("driving", "transit", "bicycling", "walking").
     * If you want to viualize the locations, you can run the first part of `visualization.r`.
     * Right now only 2 destinations are supported.
@@ -42,3 +43,14 @@ Scrapes all the towns in the area and outputs them to `data\origins.csv`. The fo
 The script uses osmium with an osm extract for full ofline use.
 
 By default it selects all nodes with place tag "town", "village", "city" and "suburb". This may be too detailled for you. Or if you only want to use it for once city you could select all single addresses in a city, or all trainstations in an area. Since `origins.csv`, which is later used for the distance calculation is only coordinates, you can choose any filter that you want.
+
+### osmium merge
+
+Using a full German extract crashed after 14h.
+
+You can combine multiple smaller osm extracts (eg from single federal states):
+
+```bash
+sudo apt install osmium-tool
+osmium merge file1.osm.pbf file2.osm.pbf -o osm.osm.pbf
+```
