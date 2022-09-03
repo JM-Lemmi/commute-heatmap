@@ -2,7 +2,13 @@
 
 ## Example
 
+### multiple destinations
+
 ![](./.github/visualization-cum.png)
+
+### single destination
+
+![](./.github/visualization-1.png)
 
 ## Usage
 
