@@ -51,11 +51,17 @@ By default it selects all nodes with place tag "town", "village", "city" and "su
 
 ### transform.py
 
-Has the option to manually add time to a commute, if you want to adjust the time from the Maps API.
+Some features are deactivated by default, but you can activate it by setting the marked boolean to `True` in `transform.py`.
+
+#### add time
+
+Manually add time to a commute, if you want to adjust the time from the Maps API.
 
 This may be useful since you cannot combine transit and other modes of transportation explicitly. The use case would be setting the destination to central station, then adding 10 minutes that you know its gonna take to ride from central station to work.
 
-The feature is deactivated by default, but you can activate it by setting `addman` to `True` in `transform.py`.
+#### cap time
+
+Cap the time to a maximum value. This is useful if you want to exclude long commutes, since they are not very interesting.
 
 ### osmium merge
 

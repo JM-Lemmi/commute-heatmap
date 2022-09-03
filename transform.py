@@ -38,10 +38,19 @@ for j in range(numdest):                            #destination loop
 # add time to one destination manually
 addman = False # set this to true to use this feature
 if addman:
-    adddest = 2  #choose which destination (1 or 2)
+    adddest = 2  #choose which destination (1 or 2), or both (0)
     addtime = 10 #time in minutes
     for l in range(len(dataset)):
         dataset[l][2+adddest] += addtime
+
+# set a cap to commute time
+addcap = False # set this to true to use this feature
+if addcap:
+    capdest = 0  #choose which destination (1 or 2), or both (0)
+    captime = 3*60 #time in minutes
+    for m in range(len(dataset)):
+        if dataset[m][2+capdest] > captime:
+            dataset[m][2+capdest] = captime
 
 # then the sum of all the time values we collected
 for k in range(len(dataset)):

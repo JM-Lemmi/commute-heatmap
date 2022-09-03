@@ -52,13 +52,6 @@ coords.data <- read.csv(file="./data/dataset.csv")
 coords.frame <- data.frame(coords.data[[1]], coords.data[[2]], coords.data[[3]], coords.data[[4]], coords.data[[5]])
 colnames(coords.frame) <- c("lat", "lon", "Time", "origin1", "origin2")
 
-# limitierung auf 3h, um bessere plotfarben zu bekommen
-for (i in 1:length(coords.frame$Time)) {
-    if (coords.frame$Time[i] > 3*60) {
-        coords.frame$Time[i] = 3*60
-    }
-}
-
 #cumulative
 coords.frame.cumulative=data.frame(coords.frame$lat, coords.frame$lon, coords.frame$Time)
 #https://stackoverflow.com/a/42984201/9397749
