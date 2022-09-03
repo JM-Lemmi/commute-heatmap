@@ -12,6 +12,14 @@
 
 ## Usage
 
+### Install
+
+You need to install some preqrequisites: The languages R and python and some packages for each are required.
+
+You can install the python packages with `pip install -r requirements.txt` and the R packages with `Rscript requirements.r`.
+
+### Run
+
 1. Note the borders of of your area in `data\borders.txt` as comma separated values in the order left, bottom, right, top.
 2. Download an osm extract for your area, for example Germany from here: https://download.geofabrik.de/europe/germany.html<br>Put the osm file in the `data` folder and rename it to `osm.osm.pbf`.
     * If you have a more narrow choice of origins, you can also manually add them to `data\origins.csv`. The format is: `lat,lon`.
