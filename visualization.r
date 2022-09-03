@@ -54,8 +54,8 @@ colnames(coords.frame) <- c("lat", "lon", "Time", "origin1", "origin2")
 
 # limitierung auf 3h, um bessere plotfarben zu bekommen
 for (i in 1:length(coords.frame$Time)) {
-    if (coords.frame$Time[i] > 10800) {
-        coords.frame$Time[i] = 10800
+    if (coords.frame$Time[i] > 3*60) {
+        coords.frame$Time[i] = 3*60
     }
 }
 
@@ -100,7 +100,7 @@ heatmap.2 <- heatmap.2 +
     geom_raster(data=df3.2, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
     geom_contour(data=df3.2, aes(z = Time),
         color="grey",
-        binwidth = 10*60) +
+        binwidth = 10) +
     scale_fill_gradientn(colours = matlab.like2(7)) +
     coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
 
