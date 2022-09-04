@@ -37,73 +37,65 @@ colnames(origins.df) <- c("lat","lon")
 heatmap.base <- heatmap.base + geom_point(data=origins.df,  aes(x=lon, y=lat), fill="red", shape=23, alpha=0.8)
 
 #DESTINATIONS
-# load coords from file
+# load coords from file into data frame
 dest <- read.csv(file="./data/destinations.csv", header = FALSE)
 dest.df <- data.frame(dest[[1]], dest[[2]])
 colnames(dest.df) <- c("lat","lon")
 
+destcount <- length(dest.df$lat)
+
 # paint dots on map
 # at this point we split into three heatmaps: cumulative and one for each destination
 heatmap.cumulative <- heatmap.base + geom_point(data=dest.df,  aes(x=lon, y=lat), fill="green", shape=23, alpha=0.8)
-heatmap.1 <- heatmap.cumulative + geom_point(aes(x=dest.df$lon[1], y=dest.df$lat[1]), fill="green", shape=23, alpha=0.8)
-heatmap.2 <- heatmap.cumulative + geom_point(aes(x=dest.df$lon[2], y=dest.df$lat[2]), fill="green", shape=23, alpha=0.8)
+
+singleheatmaps <- list()
+for (i in 1:destcount) {
+  singleheatmaps[[i]] <- heatmap.base + geom_point(aes(x=dest.df$lon[i], y=dest.df$lat[i]), fill="green", shape=23, alpha=0.8)
+}
 
 ### 2 ###
 
 coords.data <- read.csv(file="./data/dataset.csv")
-coords.frame <- data.frame(coords.data[[1]], coords.data[[2]], coords.data[[3]], coords.data[[4]], coords.data[[5]])
-colnames(coords.frame) <- c("lat", "lon", "Time", "origin1", "origin2")
+coords.frame <- data.frame(coords.data)
+colnames(coords.frame)[1:3] <- c("lat", "lon", "Time")
 
-#cumulative
-coords.frame.cumulative=data.frame(coords.frame$lat, coords.frame$lon, coords.frame$Time)
-#https://stackoverflow.com/a/42984201/9397749
-mba.cum <- mba.surf(coords.frame.cumulative, 300, 300, extend=T)
-dimnames(mba.cum$xyz.est$z) <- list(mba.cum$xyz.est$x, mba.cum$xyz.est$y)
-df3.cum <- melt(mba.cum$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
+create_heatmap <- function(coords.frame, basemap, contour=FALSE) { # coords.frame is a data.frame with lat, lon, Time, basemap a ggplot, contour if the contour should be done
+    #https://stackoverflow.com/a/42984201/9397749
+    mba <- mba.surf(coords.frame, 300, 300, extend=T)
+    dimnames(mba$xyz.est$z) <- list(mba$xyz.est$x, mba$xyz.est$y)
+    df3 <- melt(mba$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
 
-heatmap.cumulative <- heatmap.cumulative +
-    geom_raster(data=df3.cum, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
-    scale_fill_gradientn(colours = matlab.like2(7)) +
-    coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
+    heatmap <- basemap +
+        geom_raster(data=df3, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
+        scale_fill_gradientn(colours = matlab.like2(7)) +
+        coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
+    
+    if (contour) {
+        heatmap <- heatmap + geom_contour(data=df3.1, aes(z = Time), color="grey", binwidth = 10*60)
+    }
 
-#1
-#cumulative
-coords.frame.1=data.frame(coords.frame$lat, coords.frame$lon, coords.frame$origin1)
-#https://stackoverflow.com/a/42984201/9397749
-mba.1 <- mba.surf(coords.frame.1, 300, 300, extend=T)
-dimnames(mba.1$xyz.est$z) <- list(mba.1$xyz.est$x, mba.1$xyz.est$y)
-df3.1 <- melt(mba.1$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
+    return(heatmap)
+}
 
-heatmap.1 <- heatmap.1 +
-    geom_raster(data=df3.1, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
-    geom_contour(data=df3.1, aes(z = Time),
-        color="grey",
-        binwidth = 10*60) +
-    scale_fill_gradientn(colours = matlab.like2(7)) +
-    coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
+#cumulative plot
+heatmap.cumulative <- create_heatmap(data.frame(coords.frame$lat, coords.frame$lon, coords.frame$Time), heatmap.cumulative)
 
+#single plots
+for (i in 1:destcount) {
+  singleheatmaps[[i]] <- create_heatmap(data.frame(coords.frame$lat, coords.frame$lon, coords.frame[[i+3]]), singleheatmaps[[i]], contour=TRUE)
+}
 
-#2
-#cumulative
-coords.frame.2=data.frame(coords.frame$lat, coords.frame$lon, coords.frame$origin2)
-#https://stackoverflow.com/a/42984201/9397749
-mba.2 <- mba.surf(coords.frame.2, 300, 300, extend=T)
-dimnames(mba.2$xyz.est$z) <- list(mba.2$xyz.est$x, mba.2$xyz.est$y)
-df3.2 <- melt(mba.2$xyz.est$z, varnames = c('lat', 'lon'), value.name = 'Time')
-
-heatmap.2 <- heatmap.2 +
-    geom_raster(data=df3.2, aes(x=lon, y=lat, fill=Time), alpha=0.25) +
-    geom_contour(data=df3.2, aes(z = Time),
-        color="grey",
-        binwidth = 10) +
-    scale_fill_gradientn(colours = matlab.like2(7)) +
-    coord_cartesian() #https://stackoverflow.com/a/61899479/9397749
 
 ### general ###
 
+#apply theme
 heatmap.cumulative <- heatmap.cumulative + theme_bw()
-heatmap.1 <- heatmap.1 + theme_bw()
-heatmap.2 <- heatmap.2 + theme_bw()
+for (i in 1:destcount) {
+  singleheatmaps[[i]] <- singleheatmaps[[i]] + theme_bw()
+}
+
+#save plots
 ggsave(filename="./data/visualization-cum.svg", plot=heatmap.cumulative)
-ggsave(filename="./data/visualization-1.svg", plot=heatmap.1)
-ggsave(filename="./data/visualization-2.svg", plot=heatmap.2)
+for (i in 1:destcount) {
+  ggsave(filename=paste0("./data/visualization-",i,".svg"), plot=singleheatmaps[[i]])
+}

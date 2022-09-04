@@ -25,9 +25,9 @@ You can install the python packages with `pip install -r requirements.txt` and t
     * If you have a more narrow choice of origins, you can also manually add them to `data\origins.csv`. The format is: `lat,lon`.
     * You should choose the smallest possible extract, because the bigger the file, the longer it takes to process it. See more details below.
 3. Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot and the commuting mode ("driving", "transit", "bicycling", "walking").
-    * Right now only 2 destinations are supported.
+    * You can add as many destinations as you want.
 4. Copy your Google Maps API key to `api.key`. It needs access to the [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview).
-5. Run `./run.bat` to start the whole process.<br>3 Maps will be output: Cumulative `data\visualization-cum.svg` and one each for the destinations.
+5. Run `./run.bat` to start the whole process.<br>Multiple Maps will be output: One Cumulative `data\visualization-cum.svg` and one each for the destinations.
 
 ### Run single steps
 
@@ -37,7 +37,7 @@ Each one of these steps can be run seperately, so if you change some data, you d
 5. Run `scraper.py` to scrape all the towns in your area, output to `data\origins.csv`.
 6. Run `distance.py`, to collect the data from the maps api about distance. The data will be output into `data\distances.pickle`.
 7. Run `transform.py` to transform the data into a csv table at `data\dataset.csv`.
-8. Run `visualization.r` to create the 3 heatmaps.
+8. Run `visualization.r` to create the heatmaps.
 
 ## Detailed information & Troubleshooting
 
