@@ -36,7 +36,7 @@ for j in range(numdest):                            #destination loop
             dataset[i][3+j] = 3*60 # this value should be higher than anything else, but not too high as to make the rest of the data basically invisible.
 
 # add time to one destination manually
-addman = True # set this to true to use this feature
+addman = False # set this to true to use this feature
 if addman:
     adddest = 2  #choose which destination (1 or 2)
     addtime = 10 #time in minutes
@@ -64,7 +64,7 @@ if addman:
         dataset[l][2] += addtime
 
 # set a cap to cumulative commute time
-addcap = True # set this to true to use this feature
+addcap = False # set this to true to use this feature
 if addcap:
     captime = 3*60 #time in minutes
     for m in range(len(dataset)):
