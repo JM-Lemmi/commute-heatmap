@@ -15,6 +15,8 @@ library(reshape2)
 library(colorRamps)
 library(scales)
 
+library(svglite)
+
 # get the borders of the map from ./data/borders.txt
 borders <- scan(file = "./data/borders.txt", what = numeric(), sep = ",")
 
@@ -102,6 +104,6 @@ heatmap.2 <- heatmap.2 +
 heatmap.cumulative <- heatmap.cumulative + theme_bw()
 heatmap.1 <- heatmap.1 + theme_bw()
 heatmap.2 <- heatmap.2 + theme_bw()
-ggsave(filename="./data/visualization-cum.png", plot=heatmap.cumulative)
-ggsave(filename="./data/visualization-1.png", plot=heatmap.1)
-ggsave(filename="./data/visualization-2.png", plot=heatmap.2)
+ggsave(filename="./data/visualization-cum.svg", plot=heatmap.cumulative)
+ggsave(filename="./data/visualization-1.svg", plot=heatmap.1)
+ggsave(filename="./data/visualization-2.svg", plot=heatmap.2)

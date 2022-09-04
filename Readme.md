@@ -27,7 +27,7 @@ You can install the python packages with `pip install -r requirements.txt` and t
 3. Note the commuting destinations in `data\destinations.csv`. One per line lat,long with decimal dot and the commuting mode ("driving", "transit", "bicycling", "walking").
     * Right now only 2 destinations are supported.
 4. Copy your Google Maps API key to `api.key`. It needs access to the [Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/overview).
-5. Run `./run.bat` to start the whole process.<br>3 Maps will be output: Cumulative `data\visualization-cum.png` and one each for the destinations.
+5. Run `./run.bat` to start the whole process.<br>3 Maps will be output: Cumulative `data\visualization-cum.svg` and one each for the destinations.
 
 ### Run single steps
 
